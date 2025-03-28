@@ -1,8 +1,10 @@
+package ru.practicum.Model;
+
 public class Subtask extends Task{
     public Epic epic;
 
-    public Subtask(String name, String description, Epic epic) {
-        super(name, description);
+    public Subtask(String name, String description, int id, Epic epic) {
+        super(name, description, id);
         this.epic = epic;
     }
 
@@ -14,12 +16,14 @@ public class Subtask extends Task{
         this.epic = epic;
     }
 
+
     @Override
     public String toString() {
         return "Subtask{" +
-                "epic=" + epic.toString() +
+                "epic=" + epic +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", id=" + id +
                 ", status=" + status +
                 '}';
     }

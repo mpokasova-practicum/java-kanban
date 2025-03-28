@@ -1,13 +1,17 @@
+package ru.practicum.Model;
+
 import java.util.Objects;
 
 public class Task {
     public String name;
     public String description;
+    public int id;
     public TaskStatus status;
 
-    public Task (String name, String description) {
+    public Task (String name, String description, int id) {
         this.name = name;
         this.description = description;
+        this.id = id;
         this.status = TaskStatus.NEW;
     }
 
@@ -27,6 +31,14 @@ public class Task {
         this.description = description;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public TaskStatus getStatus() {
         return status;
     }
@@ -42,15 +54,17 @@ public class Task {
 
         Task task = (Task) o;
 
-        return Objects.equals(name, task.name) &&
-                Objects.equals(description, task.description) &&
-                (status == task.status);
+        if (id != task.id) return false;
+        if (!Objects.equals(name, task.name)) return false;
+        if (!Objects.equals(description, task.description)) return false;
+        return status == task.status;
     }
 
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + id;
         result = 31 * result + status.hashCode();
         return result;
     }
@@ -58,11 +72,10 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "id'" + hashCode() + '\'' +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", id=" + id +
                 ", status=" + status +
                 '}';
     }
 }
-

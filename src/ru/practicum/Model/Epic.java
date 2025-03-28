@@ -1,12 +1,18 @@
+package ru.practicum.Model;
+
 import java.util.ArrayList;
 
 public class Epic extends Task{
     public ArrayList<Subtask> subtasks;
 
-    public Epic(String name, String description, ArrayList<Subtask> subtasks) {
-        super(name, description);
+    public Epic(String name, String description, int id, ArrayList<Subtask> subtasks) {
+        super(name, description, id);
         calculateEpicStatus();
         this.subtasks = subtasks;
+    }
+
+    public ArrayList<Subtask> getSubtasks() {
+        return subtasks;
     }
 
     public boolean isInStatus (ArrayList<Subtask> subtasks, TaskStatus status) {
@@ -31,10 +37,12 @@ public class Epic extends Task{
     @Override
     public String toString() {
         return "Epic{" +
-                "subtasks.size=" + subtasks.size() +
+                "subtasks=" + subtasks +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", id=" + id +
                 ", status=" + status +
                 '}';
     }
+
 }
