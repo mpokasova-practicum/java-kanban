@@ -1,4 +1,4 @@
-package ru.practicum.Model;
+package ru.practicum.model;
 
 public class Subtask extends Task{
     public Epic epic;

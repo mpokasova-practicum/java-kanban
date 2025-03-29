@@ -1,10 +1,10 @@
-package ru.practicum.TaskManager;
+package ru.practicum.manager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import  ru.practicum.Model.Epic;
-import  ru.practicum.Model.Task;
-import  ru.practicum.Model.Subtask;
+import  ru.practicum.model.Epic;
+import  ru.practicum.model.Task;
+import  ru.practicum.model.Subtask;
 
 
 
@@ -40,7 +40,7 @@ public class TaskManager {
 
     public void deleteAllEpics () {
         epics.clear();
-        deleteAllSubtasks();
+        subtasks.clear();
     }
 
     public Task getTaskById (int id) {
@@ -94,6 +94,7 @@ public class TaskManager {
     public void deleteSubtaskById (int id) {
         Epic epic = subtasks.get(id).getEpic();
         epic.getSubtasks().remove(id);
+        epic.calculateEpicStatus();
         subtasks.remove(id);
     }
 

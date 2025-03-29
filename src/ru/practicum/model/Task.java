@@ -1,4 +1,4 @@
-package ru.practicum.Model;
+package ru.practicum.model;
 
 import java.util.Objects;
 
