@@ -1,4 +1,4 @@
-package ru.practicum.model;
+package main.model;
 
 public enum TaskStatus {
     NEW,
