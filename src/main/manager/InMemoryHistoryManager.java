@@ -12,11 +12,13 @@ public class InMemoryHistoryManager implements HistoryManager{
         if (history.size() == 10) {
             history.remove(0);
         }
-        history.add(task);
+        Task tempTask = new Task(task.getName(), task.getDescription(), task.getId());
+        tempTask.setStatus(task.getStatus());
+        history.add(tempTask);
     }
 
     @Override
     public ArrayList<Task> getHistory() {
-        return history;
+        return new ArrayList<>(history);
     }
 }

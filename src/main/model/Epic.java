@@ -15,6 +15,10 @@ public class Epic extends Task{
         return subtasks;
     }
 
+    public void setSubtasks(ArrayList<Subtask> subtasks) {
+        this.subtasks = subtasks;
+    }
+
     public boolean isInStatus (ArrayList<Subtask> subtasks, TaskStatus status) {
         for (Subtask subtask : subtasks) {
             if (!subtask.getStatus().equals(status)) {

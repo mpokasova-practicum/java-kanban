@@ -102,7 +102,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateEpic (Epic epic) {
-        tasks.put(epic.getId(), epic);
+        epics.put(epic.getId(), epic);
         epic.calculateEpicStatus();
     }
 
