@@ -8,7 +8,7 @@ public class Task {
     public int id;
     public TaskStatus status;
 
-    public Task (String name, String description, int id) {
+    public Task(String name, String description, int id) {
         this.name = name;
         this.description = description;
         this.id = id;
