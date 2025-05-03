@@ -3,7 +3,7 @@ package main.manager;
 import main.model.Task;
 import java.util.*;
 
-public class InMemoryHistoryManager implements HistoryManager{
+public class InMemoryHistoryManager implements HistoryManager {
     HandMadeLinkedHashMap history;
 
     @Override
