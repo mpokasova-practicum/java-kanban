@@ -4,7 +4,7 @@ import main.model.Task;
 import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    HandMadeLinkedHashMap history;
+    HandMadeLinkedHashMap history = new HandMadeLinkedHashMap();
 
     @Override
     public void add(Task task) {

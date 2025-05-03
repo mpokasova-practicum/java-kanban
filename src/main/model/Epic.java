@@ -29,7 +29,7 @@ public class Epic extends Task {
     }
 
     public void calculateEpicStatus() {
-        if (subtasks.isEmpty() || isInStatus(subtasks, TaskStatus.NEW)) {
+        if (subtasks == null || subtasks.isEmpty() || isInStatus(subtasks, TaskStatus.NEW)) {
             status = TaskStatus.NEW;
         } else if (isInStatus(subtasks, TaskStatus.DONE)) {
             status = TaskStatus.DONE;

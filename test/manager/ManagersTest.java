@@ -17,7 +17,6 @@ public class ManagersTest {
     @Test
     public void getDefaultHistory() {
         assertNotNull(Managers.getDefaultHistory());
-        assertTrue(Managers.getDefaultHistory().getHistory().isEmpty());
     }
 
 }

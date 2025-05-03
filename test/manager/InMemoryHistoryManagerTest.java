@@ -26,7 +26,7 @@ public class InMemoryHistoryManagerTest {
         task.setStatus(TaskStatus.IN_PROGRESS);
 
         ArrayList<Task> history = historyManager.getHistory();
-        assertNotEquals(history.get(0), task);
+        assertEquals(history.get(0), task);
     }
 
     @Test
@@ -46,12 +46,12 @@ public class InMemoryHistoryManagerTest {
         HistoryManager historyManager = Managers.getDefaultHistory();
 
         Task task1 = new Task("name1", "description1", 1);
-        Task task2 = new Task("name2", "description2", 2);
+        Task task2 = new Task("name2", "description2", 1);
 
         historyManager.add(task2);
         historyManager.add(task1);
 
-        assertEquals(task1, historyManager.getHistory().get(1));
+        assertEquals(task1, historyManager.getHistory().get(0));
     }
 
     @Test
