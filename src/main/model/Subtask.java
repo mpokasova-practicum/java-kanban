@@ -1,6 +1,6 @@
 package main.model;
 
-public class Subtask extends Task{
+public class Subtask extends Task {
     public Epic epic;
 
     public Subtask(String name, String description, int id, Epic epic) {

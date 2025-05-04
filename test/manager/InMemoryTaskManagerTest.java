@@ -1,4 +1,4 @@
-package test;
+package manager;
 
 import main.manager.Managers;
 import main.manager.TaskManager;
@@ -14,16 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class InMemoryTaskManagerTest {
 
-    TaskManager taskManager;
-
-    @BeforeEach
-    public void init() {
-        taskManager = Managers.getDefault();
-    }
-
 
     @Test
     public void addAndFindTask() {
+        TaskManager taskManager = Managers.getDefault();
         Task task = new Task(
                 "name",
                 "description",
@@ -35,6 +29,7 @@ public class InMemoryTaskManagerTest {
 
     @Test
     public void addAndFindEpic() {
+        TaskManager taskManager = Managers.getDefault();
         Epic epic = new Epic(
                 "name",
                 "description",
@@ -47,6 +42,7 @@ public class InMemoryTaskManagerTest {
 
     @Test
     public void addAndFindSubtask() {
+        TaskManager taskManager = Managers.getDefault();
         Epic epic = new Epic(
                 "name",
                 "description",
@@ -65,6 +61,7 @@ public class InMemoryTaskManagerTest {
 
     @Test
     public void shouldBeTheSameAfterAdding() {
+        TaskManager taskManager = Managers.getDefault();
         Task task1 = new Task(
                 "name",
                 "description",
@@ -72,10 +69,17 @@ public class InMemoryTaskManagerTest {
         );
         taskManager.createTask(task1);
         Task task2 = taskManager.getTaskById(task1.getId());
-        assertEquals(task1.getName(), task2.getName());
-        assertEquals(task1.getDescription(), task2.getDescription());
-        assertEquals(task1.getId(), task2.getId());
-        assertEquals(task1.getStatus(), task2.getStatus());
+        assertEquals(task1, task2);
+    }
+
+    @Test
+    public void testUniqueIdGeneration() {
+        TaskManager taskManager = Managers.getDefault();
+        Task task1 = new Task("name1", "description1", 1);
+        Task task2 = new Task("name2", "description2", 2);
+        taskManager.createTask(task1);
+        taskManager.createTask(task2);
+        assertEquals(task1.getId() + 1, task2.getId());
     }
 
 }
