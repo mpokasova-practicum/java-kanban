@@ -2,7 +2,7 @@ package main.model;
 
 import java.util.ArrayList;
 
-public class Epic extends Task{
+public class Epic extends Task {
     public ArrayList<Subtask> subtasks;
 
     public Epic(String name, String description, int id, ArrayList<Subtask> subtasks) {
@@ -19,7 +19,7 @@ public class Epic extends Task{
         this.subtasks = subtasks;
     }
 
-    public boolean isInStatus (ArrayList<Subtask> subtasks, TaskStatus status) {
+    public boolean isInStatus(ArrayList<Subtask> subtasks, TaskStatus status) {
         for (Subtask subtask : subtasks) {
             if (!subtask.getStatus().equals(status)) {
                 return false;
@@ -29,7 +29,7 @@ public class Epic extends Task{
     }
 
     public void calculateEpicStatus() {
-        if (subtasks.isEmpty() || isInStatus(subtasks, TaskStatus.NEW)) {
+        if (subtasks == null || subtasks.isEmpty() || isInStatus(subtasks, TaskStatus.NEW)) {
             status = TaskStatus.NEW;
         } else if (isInStatus(subtasks, TaskStatus.DONE)) {
             status = TaskStatus.DONE;
