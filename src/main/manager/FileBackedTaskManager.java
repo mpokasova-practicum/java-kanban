@@ -33,6 +33,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     public static FileBackedTaskManager loadFromFile(File file) {
         FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager(file);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            bufferedReader.readLine();
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
                 Task task = fromString(line);
@@ -44,7 +45,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                     fileBackedTaskManager.createEpic((Epic) task);
                 }
             }
-            bufferedReader.close();
             return fileBackedTaskManager;
         } catch (IOException e) {
             throw new ManagerSaveException("Ошибка при чтении из файла");
@@ -74,13 +74,16 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
         Task result = null;
         switch (type) {
-            case TASK:
+            case TaskType.TASK:
                 result = new Task(name, description, id);
-            case EPIC:
+                break;
+            case TaskType.EPIC:
                 result = new Epic(name, description, id, new ArrayList<>());
-            case SUBTASK:
+                break;
+            case TaskType.SUBTASK:
                 int epicId = Integer.parseInt((split[5]));
                 result = new Subtask(name, description, id, new Epic(null, null, epicId, new ArrayList<>()));
+                break;
         }
         result.setStatus(status);
         return result;
