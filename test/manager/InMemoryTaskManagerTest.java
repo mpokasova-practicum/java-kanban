@@ -1,13 +1,16 @@
 package manager;
 
+import main.manager.ManagerValidateException;
 import main.manager.Managers;
 import main.manager.TaskManager;
 import main.model.Epic;
 import main.model.Subtask;
 import main.model.Task;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -80,6 +83,19 @@ public class InMemoryTaskManagerTest {
         taskManager.createTask(task1);
         taskManager.createTask(task2);
         assertEquals(task1.getId() + 1, task2.getId());
+    }
+
+    @Test
+    public void prioritizeCheck() {
+        TaskManager taskManager = Managers.getDefault();
+        Task task1 = new Task("name1", "description1", 1);
+        Task task2 = new Task("name2", "description2", 2);
+        task1.setStartTime(LocalDateTime.of(2025, Month.APRIL, 10, 9, 0, 0));
+        task1.setDuration(Duration.ofMinutes(60));
+        task2.setStartTime(LocalDateTime.of(2025, Month.APRIL, 10, 9, 30, 0));
+        task2.setDuration(Duration.ofMinutes(60));
+        taskManager.createTask(task1);
+        assertThrows(ManagerValidateException.class, () -> taskManager.createTask(task2));
     }
 
 }
