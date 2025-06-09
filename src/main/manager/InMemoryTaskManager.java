@@ -8,7 +8,7 @@ import java.util.TreeSet;
 import main.model.Epic;
 import main.model.Task;
 import main.model.Subtask;
-
+import main.model.TaskType;
 
 
 public class InMemoryTaskManager implements TaskManager {
@@ -40,13 +40,13 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteAllTasks() {
         tasks.clear();
-        prioritizedTasks.removeIf(task -> task instanceof Task);
+        prioritizedTasks.removeIf(task -> task.getTaskType().equals(TaskType.TASK));
     }
 
     @Override
     public void deleteAllSubtasks() {
         subtasks.clear();
-        prioritizedTasks.removeIf(task -> task instanceof Subtask);
+        prioritizedTasks.removeIf(task -> task.getTaskType().equals(TaskType.SUBTASK));
         epics.values().forEach(
                 epic -> {
                     epic.getSubtasks().clear();
@@ -59,7 +59,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void deleteAllEpics() {
         epics.clear();
         subtasks.clear();
-        prioritizedTasks.removeIf(task -> task instanceof Subtask);
+        prioritizedTasks.removeIf(task -> task.getTaskType().equals(TaskType.SUBTASK));
     }
 
     @Override

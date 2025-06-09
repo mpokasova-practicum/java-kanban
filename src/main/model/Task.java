@@ -24,7 +24,7 @@ public class Task {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -32,7 +32,7 @@ public class Task {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
@@ -40,7 +40,7 @@ public class Task {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -48,7 +48,7 @@ public class Task {
     }
 
     public TaskStatus getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(TaskStatus status) {
@@ -56,7 +56,7 @@ public class Task {
     }
 
     public Duration getDuration() {
-        return duration;
+        return this.duration;
     }
 
     public void setDuration(Duration duration) {
@@ -64,7 +64,7 @@ public class Task {
     }
 
     public LocalDateTime getStartTime() {
-        return startTime;
+        return this.startTime;
     }
 
     public void setStartTime(LocalDateTime startTime) {
@@ -72,10 +72,10 @@ public class Task {
     }
 
     public LocalDateTime getEndTime() {
-        if (duration == null || startTime == null) {
+        if (this.duration == null || this.startTime == null) {
             return null;
         }
-        return startTime.plus(duration);
+        return this.startTime.plus(this.duration);
     }
 
     @Override
