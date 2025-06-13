@@ -1,5 +1,7 @@
 package main.model;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Task {
@@ -7,6 +9,8 @@ public class Task {
     public String description;
     public int id;
     public TaskStatus status;
+    public Duration duration;
+    public LocalDateTime startTime;
 
     public Task(String name, String description, int id) {
         this.name = name;
@@ -20,7 +24,7 @@ public class Task {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -28,7 +32,7 @@ public class Task {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
@@ -36,7 +40,7 @@ public class Task {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -44,11 +48,34 @@ public class Task {
     }
 
     public TaskStatus getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    public Duration getDuration() {
+        return this.duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return this.startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        if (this.duration == null || this.startTime == null) {
+            return null;
+        }
+        return this.startTime.plus(this.duration);
     }
 
     @Override
@@ -82,4 +109,5 @@ public class Task {
                 ", status=" + status +
                 '}';
     }
+
 }

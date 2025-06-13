@@ -1,9 +1,12 @@
 package main.model;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Epic extends Task {
     public ArrayList<Subtask> subtasks;
+    public LocalDateTime endTime;
 
     public Epic(String name, String description, int id, ArrayList<Subtask> subtasks) {
         super(name, description, id);
@@ -12,7 +15,7 @@ public class Epic extends Task {
     }
 
     public ArrayList<Subtask> getSubtasks() {
-        return subtasks;
+        return this.subtasks;
     }
 
     @Override
@@ -31,6 +34,48 @@ public class Epic extends Task {
             }
         }
         return true;
+    }
+
+    @Override
+    public Duration getDuration() {
+        duration = Duration.ZERO;
+        subtasks.forEach(
+                subtask -> duration = duration.plus(subtask.getDuration())
+        );
+        return duration;
+    }
+
+    @Override
+    public LocalDateTime getStartTime() {
+        if (!subtasks.isEmpty()) {
+            startTime = subtasks.get(0).getStartTime();
+            subtasks.forEach(
+                    subtask -> {
+                        if (startTime.isAfter(subtask.getStartTime())) {
+                            startTime = subtask.getStartTime();
+                        }
+                    });
+            return startTime;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public LocalDateTime getEndTime() {
+        if (!subtasks.isEmpty()) {
+            endTime = subtasks.get(0).getEndTime();
+            subtasks.forEach(
+                    subtask -> {
+                        if (endTime.isBefore(subtask.getEndTime())) {
+                            endTime = subtask.getEndTime();
+                        }
+                    }
+            );
+            return endTime;
+        } else {
+            return null;
+        }
     }
 
     public void calculateEpicStatus() {

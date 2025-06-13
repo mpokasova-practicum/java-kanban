@@ -9,7 +9,7 @@ public class Subtask extends Task {
     }
 
     public Epic getEpic() {
-        return epic;
+        return this.epic;
     }
 
     public void setEpic(Epic epic) {
