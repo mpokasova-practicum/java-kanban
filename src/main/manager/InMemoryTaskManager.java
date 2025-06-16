@@ -23,6 +23,11 @@ public class InMemoryTaskManager implements TaskManager {
     );
 
     @Override
+    public HistoryManager getHistoryManager() {
+        return this.historyManager;
+    }
+
+    @Override
     public ArrayList<Task> getAllTasks() {
         return new ArrayList<>(tasks.values());
     }
@@ -183,6 +188,7 @@ public class InMemoryTaskManager implements TaskManager {
                 || task2.getEndTime().isBefore(task1.getStartTime()));
     }
 
+    @Override
     public boolean checkIfAllTasksIntersect(Task task1) {
         return prioritizedTasks.stream().anyMatch(task2 -> checkIfTwoTasksIntersect(task1, task2));
     }

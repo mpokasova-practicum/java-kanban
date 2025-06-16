@@ -47,4 +47,7 @@ public interface TaskManager {
 
     ArrayList<Task> getPrioritizedTasks();
 
+    HistoryManager getHistoryManager();
+
+    boolean checkIfAllTasksIntersect(Task task1);
 }
