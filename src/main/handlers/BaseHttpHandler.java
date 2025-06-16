@@ -11,7 +11,15 @@ import java.util.Optional;
 import com.google.gson.*;
 
 public abstract class BaseHttpHandler implements HttpHandler {
-    public enum Endpoint {GET_ALL, GET_ID, GET_SUBTASKS, POST, DELETE, UNKNOWN}
+    public enum Endpoint {
+        GET_ALL,
+        GET_ID,
+        GET_SUBTASKS,
+        POST,
+        DELETE,
+        UNKNOWN
+    }
+
     public TaskManager taskManager;
     public Gson gson;
 
