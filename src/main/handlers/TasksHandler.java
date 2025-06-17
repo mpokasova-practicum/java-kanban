@@ -66,7 +66,7 @@ public class TasksHandler extends BaseHttpHandler {
             if (taskManager.checkIfAllTasksIntersect(task)) {
                 sendHasInteractions(exchange,
                         "{\"error\":\"Данная задача пересекается по времени с одной из текущих задач\"}");
-            } else if (taskManager.getTaskById(task.getId()) == null) {
+            } else if (taskManager.getTaskById(task.getId()) == null || task.getId() == 0) {
                 taskManager.createTask(task);
                 exchange.sendResponseHeaders(201, 0);
                 exchange.close();

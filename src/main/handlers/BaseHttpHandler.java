@@ -69,11 +69,11 @@ public abstract class BaseHttpHandler implements HttpHandler {
                 return Endpoint.POST;
             }
             case "GET" -> {
-                if (pathParts.length == 3) {
+                if (pathParts.length == 4) {
                     return Endpoint.GET_SUBTASKS;
-                } else if (pathParts.length == 2) {
+                } else if (pathParts.length == 3) {
                     return Endpoint.GET_ID;
-                } else {
+                } else if (pathParts.length == 2) {
                     return Endpoint.GET_ALL;
                 }
             }

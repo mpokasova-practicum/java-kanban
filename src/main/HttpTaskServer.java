@@ -11,11 +11,23 @@ import java.net.InetSocketAddress;
 
 public class HttpTaskServer {
     private static final int PORT = 8080;
-    public static TaskManager taskManager = Managers.getDefault();
+    public static TaskManager taskManager;
     public static Gson gson;
+    public static HttpServer httpServer;
+
+    public HttpTaskServer(TaskManager taskManager) {
+        HttpTaskServer.taskManager = taskManager;
+        gson = new Gson();
+    }
 
     public static void main(String[] args) throws IOException {
-        HttpServer httpServer = HttpServer.create(new InetSocketAddress(PORT), 0);
+        TaskManager taskManager = Managers.getDefault();
+        HttpTaskServer httpServer = new HttpTaskServer(taskManager);
+        httpServer.start();
+    }
+
+    public void start() throws IOException {
+        httpServer = HttpServer.create(new InetSocketAddress(PORT), 0);
 
         httpServer.createContext("/tasks", new TasksHandler(taskManager, gson));
         httpServer.createContext("/subtasks", new SubtasksHandler(taskManager, gson));
@@ -25,7 +37,10 @@ public class HttpTaskServer {
 
         httpServer.start();
         System.out.println("HTTP-сервер запущен на " + PORT + " порту!");
+    }
 
+    public void stop() {
+        httpServer.stop(0);
     }
 }
 
